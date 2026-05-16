@@ -3022,6 +3022,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939485273}
   m_CullTransparentMesh: 1
+--- !u!1 &946356844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7458757627371460429, guid: 8e23a50d1aadfb143ac8c775fc72a600, type: 3}
+  m_PrefabInstance: {fileID: 2010026972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1027196595
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,6 +3182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstructionManager
   mainMenuPanel: {fileID: 668943765}
+  instructionsContainer: {fileID: 946356844}
   instructionPanels:
   - {fileID: 1100632587}
   - {fileID: 2071020542}
@@ -3313,7 +3319,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079008957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c724fbdc3e953274b8454beba88a6455, type: 3}
   m_Name: 
@@ -5284,6 +5290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstructionManager
   mainMenuPanel: {fileID: 668943765}
+  instructionsContainer: {fileID: 0}
   instructionPanels:
   - {fileID: 1100632587}
   - {fileID: 2071020542}

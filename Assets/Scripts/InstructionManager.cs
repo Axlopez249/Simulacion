@@ -4,6 +4,8 @@ public class InstructionManager : MonoBehaviour
 {
     public GameObject mainMenuPanel;
 
+    public GameObject instructionsContainer;
+
     public GameObject[] instructionPanels;
 
     public AudioClip[] instructionAudios;
@@ -15,6 +17,8 @@ public class InstructionManager : MonoBehaviour
     public void StartInstructions()
     {
         mainMenuPanel.SetActive(false);
+
+        instructionsContainer.SetActive(true);
 
         currentInstruction = 0;
 
@@ -52,6 +56,8 @@ public class InstructionManager : MonoBehaviour
 
     void StartSimulation()
     {
+        instructionsContainer.SetActive(false);
+
         Debug.Log("SIMULACIÓN INICIADA");
     }
 }
