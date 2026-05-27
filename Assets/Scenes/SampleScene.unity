@@ -2377,9 +2377,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cuerpo prierna cruzada
       objectReference: {fileID: 0}
-    - target: {fileID: 7157309607397930224, guid: d2cdac94be0002f40bab749ebb008004, type: 3}
+    - target: {fileID: 919132149155446097, guid: d2cdac94be0002f40bab749ebb008004, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157309607397930224, guid: d2cdac94be0002f40bab749ebb008004, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
