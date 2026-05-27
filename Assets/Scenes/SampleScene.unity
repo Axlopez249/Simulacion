@@ -1173,6 +1173,37 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &343251194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343251195}
+  m_Layer: 0
+  m_Name: RightAttach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &343251195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343251194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.0771, y: 0.0082, z: 0.0152}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 635959252}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &362618322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1929,6 +1960,7 @@ GameObject:
   - component: {fileID: 635959249}
   - component: {fileID: 635959248}
   - component: {fileID: 635959247}
+  - component: {fileID: 635959253}
   m_Layer: 0
   m_Name: 'hativ p30 '
   m_TagString: Untagged
@@ -2019,17 +2051,17 @@ MonoBehaviour:
   m_SnapToColliderVolume: 1
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
-  m_MovementType: 2
+  m_MovementType: 0
   m_PredictedVisualsTransform: {fileID: 0}
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
   m_AngularVelocityScale: 1
-  m_TrackPosition: 1
+  m_TrackPosition: 0
   m_SmoothPosition: 0
   m_SmoothPositionAmount: 8
   m_TightenPosition: 0.1
-  m_TrackRotation: 1
+  m_TrackRotation: 0
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
@@ -2110,10 +2142,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!23 &635959250
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2188,8 +2220,24 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 662732373}
+  - {fileID: 343251195}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &635959253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635959246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694eed56a6876b14fa419c9c08f0c466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DualGrabController
+  grabInteractable: {fileID: 635959247}
+  leftAttachPoint: {fileID: 662732373}
+  rightAttachPoint: {fileID: 343251195}
 --- !u!1 &662732372
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,7 +2248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 662732373}
   m_Layer: 0
-  m_Name: AttachPoint
+  m_Name: LeftAttach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2215,7 +2263,7 @@ Transform:
   m_GameObject: {fileID: 662732372}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.0601, y: 0, z: 0}
+  m_LocalPosition: {x: -0.022, y: 0.0109, z: 0.0114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6807,6 +6855,10 @@ PrefabInstance:
     - target: {fileID: 8983625966817086134, guid: 8e23a50d1aadfb143ac8c775fc72a600, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983625966817086134, guid: 8e23a50d1aadfb143ac8c775fc72a600, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2846800509955138507, guid: 8e23a50d1aadfb143ac8c775fc72a600, type: 3}
