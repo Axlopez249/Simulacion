@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class DualGrabController : MonoBehaviour
 {
-    public UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
+    public XRGrabInteractable grabInteractable;
 
     public Transform leftAttachPoint;
 
@@ -34,9 +35,13 @@ public class DualGrabController : MonoBehaviour
         {
             leftGrab = true;
 
-            grabInteractable.attachTransform = leftAttachPoint;
+            // SOLO si aún no hay otra mano
+            if(!rightGrab)
+            {
+                grabInteractable.attachTransform = leftAttachPoint;
+            }
 
-            Debug.Log("LEFT ATTACH");
+            Debug.Log("LEFT HAND DETECTED");
         }
 
         // CONTROL DERECHO
@@ -44,9 +49,13 @@ public class DualGrabController : MonoBehaviour
         {
             rightGrab = true;
 
-            grabInteractable.attachTransform = rightAttachPoint;
+            // SOLO si aún no hay otra mano
+            if(!leftGrab)
+            {
+                grabInteractable.attachTransform = rightAttachPoint;
+            }
 
-            Debug.Log("RIGHT ATTACH");
+            Debug.Log("RIGHT HAND DETECTED");
         }
 
         CheckBothHands();
@@ -66,8 +75,7 @@ public class DualGrabController : MonoBehaviour
             rightGrab = false;
         }
 
-        // Si no están ambas manos
-        // bloquear nuevamente
+        // Si NO están ambas manos
         if(!(leftGrab && rightGrab))
         {
             grabInteractable.trackPosition = false;
@@ -84,7 +92,7 @@ public class DualGrabController : MonoBehaviour
         {
             Debug.Log("DOS CONTROLES DETECTADOS");
 
-            // Ahora sí mover
+            // Desbloquear movimiento
             grabInteractable.trackPosition = true;
 
             grabInteractable.trackRotation = true;
