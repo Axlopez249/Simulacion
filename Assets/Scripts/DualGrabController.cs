@@ -1,47 +1,47 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class DualGrabController : MonoBehaviour
 {
+    [Header("XR")]
+    public XRGrabInteractable grabInteractable;
+
     [Header("Scene Objects")]
-    public GameObject crossLegMannequin;
+    public GameObject normalMannequin;
+
+    public GameObject crossedLegMannequin;
 
     public GameObject ankleZone;
-
-    [HideInInspector]
-    public bool leftHandDetected = false;
-
-    [HideInInspector]
-    public bool rightHandDetected = false;
 
     private bool alreadyActivated = false;
 
     void Start()
     {
-        // Apagados al inicio
-        crossLegMannequin.SetActive(false);
+        normalMannequin.SetActive(true);
+
+        crossedLegMannequin.SetActive(false);
 
         ankleZone.SetActive(false);
+
+        grabInteractable.selectEntered.AddListener(OnGrabbed);
     }
 
-    public void CheckBothHands()
+    void OnGrabbed(SelectEnterEventArgs args)
     {
-        if(leftHandDetected && rightHandDetected)
-        {
-            Debug.Log("AMBAS MANOS DETECTADAS");
+        // evitar repetir
+        if(alreadyActivated)
+            return;
 
-            // Solo una vez
-            if(!alreadyActivated)
-            {
-                alreadyActivated = true;
+        alreadyActivated = true;
 
-                // Activar maniquí
-                crossLegMannequin.SetActive(true);
+        // SOLO cambiar maniquí
+        normalMannequin.SetActive(false);
 
-                // Activar zona tobillo
-                ankleZone.SetActive(true);
+        crossedLegMannequin.SetActive(true);
 
-                Debug.Log("MANIQUÍ Y TOBILLO ACTIVADOS");
-            }
-        }
+        ankleZone.SetActive(true);
+
+        Debug.Log("ANKLE ZONE ACTIVADA");
     }
 }

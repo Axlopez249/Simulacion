@@ -604,7 +604,7 @@ MonoBehaviour:
   nameUi: 'Android XR: AR Anchor'
   version: 0.1.0
   featureIdInternal: com.unity.openxr.feature.arfoundation-androidxr-anchor
-  openxrExtensionStrings: XR_ANDROID_trackables XR_ANDROID_device_anchor_persistence
+  openxrExtensionStrings: XR_ANDROID_trackables
   company: Unity Technologies
   priority: 0
   targetOpenXRApiVersion: 
@@ -757,7 +757,7 @@ MonoBehaviour:
   nameUi: 'Android XR: AR Anchor'
   version: 0.1.0
   featureIdInternal: com.unity.openxr.feature.arfoundation-androidxr-anchor
-  openxrExtensionStrings: XR_ANDROID_trackables XR_ANDROID_device_anchor_persistence
+  openxrExtensionStrings: XR_ANDROID_trackables
   company: Unity Technologies
   priority: 0
   targetOpenXRApiVersion: 
@@ -777,8 +777,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   features:
   - {fileID: 2115430129124960631}
+  - {fileID: -7310815934307550112}
+  - {fileID: 4774928822065192193}
   - {fileID: -3636285821535361223}
+  - {fileID: 2254511219731522967}
+  - {fileID: 8573265715917562931}
+  - {fileID: -6158859631678707348}
   - {fileID: 1726635850936422062}
+  - {fileID: -3226207178482991527}
+  - {fileID: 2665541907700671714}
+  - {fileID: 1024346824501771072}
+  - {fileID: 2781988483038153991}
+  - {fileID: 9219265987997772651}
   - {fileID: 642219279043214438}
   - {fileID: -6279212148996162835}
   - {fileID: -3975452482949505274}
@@ -1986,8 +1996,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   features:
   - {fileID: 2109802480353105152}
-  - {fileID: -5011284457601267735}
-  - {fileID: -4414080133458148426}
+  - {fileID: 484161490036689224}
+  - {fileID: -3688430105879480005}
   - {fileID: -4954635989753619146}
   - {fileID: -7704693531768791874}
   - {fileID: 8023257435433845108}
@@ -1998,7 +2008,7 @@ MonoBehaviour:
   - {fileID: -7979023648139240403}
   - {fileID: -7340524804024996456}
   - {fileID: 274347273564094617}
-  - {fileID: -6402952714929163438}
+  - {fileID: -694691595379029039}
   - {fileID: -1528611375384339237}
   - {fileID: -7191854824877509086}
   - {fileID: 8007622838083529755}
