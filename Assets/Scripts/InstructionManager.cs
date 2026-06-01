@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Video;
+using System.Collections;   
 
 public class InstructionManager : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class InstructionManager : MonoBehaviour
 
     private int currentInstruction = 0;
 
+    public GameObject corazonsano;
+    public GameObject corazonsanoArritmia;
+    public AudioClip frenteAudio; // LOC2.1
+    public AudioClip asimpleVistaAudio;
     void Start()
     {
         // Cuando el video termine
@@ -81,6 +86,45 @@ public class InstructionManager : MonoBehaviour
             // Iniciar simulación
             StartSimulation();
         }
+    }
+    public void StartLOC2Step1()
+    {
+        // Ocultar instrucciones
+        instructionsContainer.SetActive(false);
+
+        // Asegurarse que los corazones estén desactivados al inicio
+        corazonsano.SetActive(false);
+        corazonsanoArritmia.SetActive(false);
+
+        // Reproducir primer audio LOC2.1
+        audioSource.Stop();
+        audioSource.clip = frenteAudio;
+        audioSource.Play();
+
+        Debug.Log("LOC2.1 reproducido: corazones aún desactivados.");
+
+        // Cuando termine el audio, pasar al paso 2
+        StartCoroutine(WaitForAudioToEnd(audioSource.clip.length, StartLOC2Step2));
+    }
+
+    IEnumerator WaitForAudioToEnd(float duration, System.Action nextStep)
+    {
+        yield return new WaitForSeconds(duration);
+        nextStep?.Invoke();
+    }
+
+    public void StartLOC2Step2()
+    {
+        // Activar corazones
+        corazonsano.SetActive(true);
+        corazonsanoArritmia.SetActive(true);
+
+        // Reproducir audio LOC2.2
+        audioSource.Stop();
+        audioSource.clip = asimpleVistaAudio;
+        audioSource.Play();
+
+        Debug.Log("LOC2.2: Dos corazones activos con animaciones distintas.");
     }
 
     void PlayCurrentAudio()
