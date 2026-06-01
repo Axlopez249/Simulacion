@@ -73,8 +73,20 @@ public class InstructionManager : MonoBehaviour
     [Header("Videos")]
     public GameObject videoPulgares; // Para mostrar el video de los pulgares
     public GameObject videoTobillo; // Para mostrar el video del tobillo
-    public GameObject videoPiernaCruzada; // Para mostrar la pierna cruzada 
-    public GameObject continuarPaso4Button;
+    public GameObject videoPiernaCruzada; // Para mostrar la pierna cruzada
+
+    [Header("Paso 4: Medición")]
+    [Header("Audios")]
+    public AudioClip ahoraSuturno;
+    public AudioClip crucePierna;
+    public AudioClip frenteAusted;
+    public AudioClip zonasIluminadas;
+    public AudioClip paraTomar;
+    public AudioClip seAjustara;
+
+    [Header("Botones")]
+    public GameObject continuarPaso5Button;
+
     void Start()
     {
         // Cuando el video termine
