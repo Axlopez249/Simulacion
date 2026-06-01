@@ -171,14 +171,14 @@ public class InstructionManager : MonoBehaviour
         corazonsanoArritmia.SetActive(false);
         audioSource.clip = latidoSanoAudio;
         audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
+        yield return new WaitForSeconds(5f);
 
         // Solo corazón arrítmico con su audio
         corazonsano.SetActive(false);
         corazonsanoArritmia.SetActive(true);
         audioSource.clip = latidoArritmiaAudio;
         audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
+        yield return new WaitForSeconds(5f);
 
         // Ambos corazones activos sin sonido externo
         corazonsano.SetActive(true);
@@ -207,10 +207,10 @@ public class InstructionManager : MonoBehaviour
         botonIzquierdo.SetActive(false);
         botonDerecho.SetActive(false);
 
-        // Feedback incorrecto - permitir reintentar
+        // Feedback incorrecto
         audioSource.clip = incorrectoAudio;
         audioSource.Play();
-        StartCoroutine(WaitForAudioToEnd(audioSource.clip.length, ReintentarPregunta));
+        StartCoroutine(WaitForAudioToEnd(audioSource.clip.length, NextStep));
     }
 
     // Método para cuando el usuario selecciona el corazón derecho
@@ -223,17 +223,14 @@ public class InstructionManager : MonoBehaviour
         audioSource.clip = correctoAudio;
         audioSource.Play();
 
-        // Continuar al siguiente paso
-        StartCoroutine(WaitForAudioToEnd(audioSource.clip.length, NextStep));
+        // Aquí podés llamar al siguiente paso
+        StartCoroutine(WaitForAudioToEnd2(audioSource.clip.length, NextStep));
     }
 
-    // Método para reintentar la pregunta después de respuesta incorrecta
-    void ReintentarPregunta()
+    IEnumerator WaitForAudioToEnd2(float duration, System.Action nextStep)
     {
-        // Mostrar botones nuevamente para reintentar
-        botonIzquierdo.SetActive(true);
-        botonDerecho.SetActive(true);
-        Debug.Log("Respuesta incorrecta. Reintentar...");
+        yield return new WaitForSeconds(duration);
+        nextStep?.Invoke();
     }
 
     void NextStep()
