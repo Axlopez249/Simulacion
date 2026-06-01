@@ -51,6 +51,7 @@ public class InstructionManager : MonoBehaviour
     public GameObject continuarPaso3Button;
 
     //paso3
+    public GameObject hativ; // Para mostrar el dispositivo Hativ
     public AudioClip ahoraHativAudio; // LOC3.1
     public AudioClip esteDispositivoAudio; // LOC3.2
     public AudioClip piernaAudio; // LOC3.3
@@ -284,6 +285,7 @@ public class InstructionManager : MonoBehaviour
     IEnumerator PlayLOC3Sequence()
     {
         // LOC3.1 → introducción a la medición
+        hativ.SetActive(true); // Mostrar el dispositivo Hativ
         continuarPaso3Button.SetActive(false); // Asegurarse de ocultar el botón
         audioSource.clip = ahoraHativAudio;
         audioSource.Play();
@@ -306,6 +308,7 @@ public class InstructionManager : MonoBehaviour
         yield return new WaitForSeconds(audioSource.clip.length);
 
         // LOC5.1 → colocar pulgares
+        yield return new WaitForSeconds(1f); // Pequeña pausa para transición
         audioSource.clip = pulgaresAudio;
         audioSource.Play();
         videoPiernaCruzada.SetActive(false); // Ocultar video de pierna cruzada
@@ -315,6 +318,7 @@ public class InstructionManager : MonoBehaviour
         Debug.Log("LOC5.1 completado: videoPulgares activado.");
 
         // LOC3.4 → contacto en tobillo
+        yield return new WaitForSeconds(1f); // Pequeña pausa para transición
         audioSource.clip = acontinuacionAudio;
         audioSource.Play();
         videoPulgares.SetActive(false); // Ocultar video de pulgares
@@ -324,6 +328,7 @@ public class InstructionManager : MonoBehaviour
         Debug.Log("LOC3.4 completado: videoTobillo activado.");
 
         // LOC3.5
+        yield return new WaitForSeconds(1f); // Pequeña pausa para transición
         audioSource.clip = asielsistemaAudio;
         audioSource.Play();
         videoTobillo.SetActive(false); // Ocultar video de tobillo

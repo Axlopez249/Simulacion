@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &54592581
 Transform:
   m_ObjectHideFlags: 0
@@ -2200,7 +2200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &635959247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3686,6 +3686,7 @@ MonoBehaviour:
   realizaremosAudio: {fileID: 8300000, guid: cfcff412718afdd499e2f9c509a476d5, type: 3}
   continuarPaso3Audio: {fileID: 8300000, guid: 6f3ffb9114d22b74f875dc0a8a387cc8, type: 3}
   continuarPaso3Button: {fileID: 1954526674}
+  hativ: {fileID: 635959246}
   ahoraHativAudio: {fileID: 8300000, guid: b0ac6d85c7b85c74382cee11964beace, type: 3}
   esteDispositivoAudio: {fileID: 8300000, guid: 3d3b2a9ee4a3cd34591e8e351624eb3c, type: 3}
   piernaAudio: {fileID: 8300000, guid: 94eab286fdadabb41a799d8ef0ebb34b, type: 3}
@@ -4621,7 +4622,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1273586216
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6885,6 +6886,7 @@ MonoBehaviour:
   realizaremosAudio: {fileID: 0}
   continuarPaso3Audio: {fileID: 0}
   continuarPaso3Button: {fileID: 0}
+  hativ: {fileID: 0}
   ahoraHativAudio: {fileID: 0}
   esteDispositivoAudio: {fileID: 0}
   piernaAudio: {fileID: 0}
@@ -8493,7 +8495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1969043351
 MeshRenderer:
   m_ObjectHideFlags: 0
