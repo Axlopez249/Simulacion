@@ -2981,7 +2981,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -198, y: -67.3}
-  m_SizeDelta: {x: 800, y: 500}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &891200763
 VideoPlayer:
@@ -3668,6 +3668,9 @@ MonoBehaviour:
   heartbeatAudio: {fileID: 0}
   corazonsano: {fileID: 502736732}
   corazonsanoArritmia: {fileID: 499168080}
+  botonIzquierdo: {fileID: 677620869}
+  botonDerecho: {fileID: 2141498579}
+  continuarPaso3Button: {fileID: 1954526674}
   frenteAudio: {fileID: 8300000, guid: 77632d27d025fba4988ff70925c22d12, type: 3}
   asimpleVistaAudio: {fileID: 8300000, guid: 9be4024f96d96284fb75526aa3387039, type: 3}
   observeAudio: {fileID: 8300000, guid: 1850060d2f6e3af4c88be1c0c749bfb1, type: 3}
@@ -3679,14 +3682,12 @@ MonoBehaviour:
   correctoAudio: {fileID: 8300000, guid: 127bdf6ba41f4f242a67c03d1f3a41c2, type: 3}
   incorrectoAudio: {fileID: 8300000, guid: 7c9df9fdbe9bd104389c6a7765a2285b, type: 3}
   uncorazonsanoAudio: {fileID: 8300000, guid: a7efddb01e607f641959fe42064a3d71, type: 3}
-  botonIzquierdo: {fileID: 677620869}
-  botonDerecho: {fileID: 2141498579}
   cuandoapareceAudio: {fileID: 8300000, guid: ba4253f29c10ea045a16d94e6484ee8d, type: 3}
   muchasvecesAudio: {fileID: 8300000, guid: 11d559645d09bab4da2529db240dabf6, type: 3}
   realizaremosAudio: {fileID: 8300000, guid: cfcff412718afdd499e2f9c509a476d5, type: 3}
   continuarPaso3Audio: {fileID: 8300000, guid: 6f3ffb9114d22b74f875dc0a8a387cc8, type: 3}
-  continuarPaso3Button: {fileID: 1954526674}
   hativ: {fileID: 635959246}
+  continuarPaso4Button: {fileID: 2013111169}
   ahoraHativAudio: {fileID: 8300000, guid: b0ac6d85c7b85c74382cee11964beace, type: 3}
   esteDispositivoAudio: {fileID: 8300000, guid: 3d3b2a9ee4a3cd34591e8e351624eb3c, type: 3}
   piernaAudio: {fileID: 8300000, guid: 94eab286fdadabb41a799d8ef0ebb34b, type: 3}
@@ -3700,7 +3701,6 @@ MonoBehaviour:
   videoPulgares: {fileID: 891200761}
   videoTobillo: {fileID: 1704189904}
   videoPiernaCruzada: {fileID: 1546262610}
-  continuarPaso4Button: {fileID: 2013111169}
   ahoraSuturno: {fileID: 8300000, guid: 2e54a0b0ca661474ca19733145ddc000, type: 3}
   crucePierna: {fileID: 8300000, guid: a8238f09a703ec24e841fa9d5fdadd0d, type: 3}
   frenteAusted: {fileID: 8300000, guid: 9da6145492cf62f4283a915639bd11aa, type: 3}
@@ -6315,7 +6315,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -198, y: -67.3}
-  m_SizeDelta: {x: 800, y: 500}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &1546262612
 VideoPlayer:
@@ -6879,6 +6879,9 @@ MonoBehaviour:
   heartbeatAudio: {fileID: 0}
   corazonsano: {fileID: 0}
   corazonsanoArritmia: {fileID: 0}
+  botonIzquierdo: {fileID: 0}
+  botonDerecho: {fileID: 0}
+  continuarPaso3Button: {fileID: 0}
   frenteAudio: {fileID: 0}
   asimpleVistaAudio: {fileID: 0}
   observeAudio: {fileID: 0}
@@ -6890,14 +6893,12 @@ MonoBehaviour:
   correctoAudio: {fileID: 0}
   incorrectoAudio: {fileID: 0}
   uncorazonsanoAudio: {fileID: 0}
-  botonIzquierdo: {fileID: 0}
-  botonDerecho: {fileID: 0}
   cuandoapareceAudio: {fileID: 0}
   muchasvecesAudio: {fileID: 0}
   realizaremosAudio: {fileID: 0}
   continuarPaso3Audio: {fileID: 0}
-  continuarPaso3Button: {fileID: 0}
   hativ: {fileID: 0}
+  continuarPaso4Button: {fileID: 0}
   ahoraHativAudio: {fileID: 0}
   esteDispositivoAudio: {fileID: 0}
   piernaAudio: {fileID: 0}
@@ -6911,7 +6912,6 @@ MonoBehaviour:
   videoPulgares: {fileID: 0}
   videoTobillo: {fileID: 0}
   videoPiernaCruzada: {fileID: 0}
-  continuarPaso4Button: {fileID: 0}
   ahoraSuturno: {fileID: 0}
   crucePierna: {fileID: 0}
   frenteAusted: {fileID: 0}
@@ -7100,7 +7100,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -198, y: -67.3}
-  m_SizeDelta: {x: 800, y: 500}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &1704189906
 VideoPlayer:
