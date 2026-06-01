@@ -25,8 +25,18 @@ public class InstructionManager : MonoBehaviour
 
     private int currentInstruction = 0;
 
+    [Header("Paso 2: Arritmia")]
+    [Header("Objetos")]
     public GameObject corazonsano;
     public GameObject corazonsanoArritmia;
+
+    [Header("Botones")]
+    // Estos botones se colocan en la UI encima de cada corazón
+    public GameObject botonIzquierdo;
+    public GameObject botonDerecho;
+    public GameObject continuarPaso3Button;
+
+    [Header("Audios")]
     public AudioClip frenteAudio; // LOC2.1
     public AudioClip asimpleVistaAudio;
     public AudioClip observeAudio;       // LOC2.3
@@ -38,38 +48,33 @@ public class InstructionManager : MonoBehaviour
     public AudioClip correctoAudio;   // LOC2.6a
     public AudioClip incorrectoAudio; // LOC2.6b
     public AudioClip uncorazonsanoAudio;  // LOC2.7
-
-    // Estos botones se colocan en la UI encima de cada corazón
-    public GameObject botonIzquierdo;
-    public GameObject botonDerecho;
-
     public AudioClip cuandoapareceAudio;
     public AudioClip muchasvecesAudio;
     public AudioClip realizaremosAudio;
     public AudioClip continuarPaso3Audio;
 
-    public GameObject continuarPaso3Button;
-
     //paso3
+    [Header("Paso 3: Introducción dispositivo")]
+
+    [Header("Objetos")]
     public GameObject hativ; // Para mostrar el dispositivo Hativ
+
+
+    [Header("Botones")]
+    public GameObject continuarPaso4Button;
+
+
+    [Header("Audios")]
     public AudioClip ahoraHativAudio; // LOC3.1
     public AudioClip esteDispositivoAudio; // LOC3.2
     public AudioClip piernaAudio; // LOC3.3
     public AudioClip pulgaresAudio, acontinuacionAudio, asielsistemaAudio, mientrasrealizaAudio, estoayudaraAudio, enunosAudio, continuarPaso4Audio;
 
+    [Header("Videos")]
     public GameObject videoPulgares; // Para mostrar el video de los pulgares
     public GameObject videoTobillo; // Para mostrar el video del tobillo
     public GameObject videoPiernaCruzada; // Para mostrar la pierna cruzada 
     public GameObject continuarPaso4Button;
-
-    //paso4 - LOC4
-    public AudioClip ahoraSuturno;
-    public AudioClip crucePierna;
-    public AudioClip frenteAusted;
-    public AudioClip zonasIluminadas;
-    public AudioClip paraTomar;
-    public AudioClip seAjustara;
-    public GameObject continuarPaso5Button;
     void Start()
     {
         // Cuando el video termine
