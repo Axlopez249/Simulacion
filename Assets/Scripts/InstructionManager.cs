@@ -52,6 +52,14 @@ public class InstructionManager : MonoBehaviour
 
     //paso3
     public AudioClip ahoraHativAudio; // LOC3.1
+    public AudioClip esteDispositivoAudio; // LOC3.2
+    public AudioClip piernaAudio; // LOC3.3
+    public AudioClip pulgaresAudio, acontinuacionAudio, asielsistemaAudio, mientrasrealizaAudio, estoayudaraAudio, enunosAudio, continuarPaso4Audio;
+
+    public GameObject videoPulgares; // Para mostrar el video de los pulgares
+    public GameObject videoTobillo; // Para mostrar el video del tobillo
+    public GameObject videoPiernaCruzada; // Para mostrar la pierna cruzada 
+    public GameObject continuarPaso4Button;
     void Start()
     {
         // Cuando el video termine
@@ -250,6 +258,8 @@ public class InstructionManager : MonoBehaviour
         yield return new WaitForSeconds(audioSource.clip.length);
 
         // LOC2.11
+        corazonsano.SetActive(false);
+        corazonsanoArritmia.SetActive(false);
         audioSource.clip = continuarPaso3Audio;
         audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length);
@@ -262,7 +272,6 @@ public class InstructionManager : MonoBehaviour
     // Método que se llama al presionar el botónPaso3Button
     public void OnContinuarClicked3()
     {
-        continuarPaso3Button.SetActive(false);
         Debug.Log("Botón Continuar presionado → iniciar LOC3.");
         StartLOC3(); // Aquí enganchás con el siguiente bloque
     }
@@ -275,11 +284,73 @@ public class InstructionManager : MonoBehaviour
     IEnumerator PlayLOC3Sequence()
     {
         // LOC3.1 → introducción a la medición
+        continuarPaso3Button.SetActive(false); // Asegurarse de ocultar el botón
         audioSource.clip = ahoraHativAudio;
         audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length);
 
         Debug.Log("LOC3.1 completado: listo para mostrar la interfaz de medición.");
+        Debug.Log("LOC3.1 completado.");
+
+        // LOC3.2 → solo audio
+        audioSource.clip = esteDispositivoAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC3.2 completado.");
+
+        // LOC3.3 → activar video de doblar pierna
+        audioSource.clip = piernaAudio;
+        audioSource.Play();
+        videoPiernaCruzada.SetActive(true);
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        // LOC5.1 → colocar pulgares
+        audioSource.clip = pulgaresAudio;
+        audioSource.Play();
+        videoPiernaCruzada.SetActive(false); // Ocultar video de pierna cruzada
+        videoPulgares.SetActive(true);
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC5.1 completado: videoPulgares activado.");
+
+        // LOC3.4 → contacto en tobillo
+        audioSource.clip = acontinuacionAudio;
+        audioSource.Play();
+        videoPulgares.SetActive(false); // Ocultar video de pulgares
+        videoTobillo.SetActive(true);
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC3.4 completado: videoTobillo activado.");
+
+        // LOC3.5
+        audioSource.clip = asielsistemaAudio;
+        audioSource.Play();
+        videoTobillo.SetActive(false); // Ocultar video de tobillo
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        // LOC3.6
+        audioSource.clip = mientrasrealizaAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        // LOC3.7
+        audioSource.clip = estoayudaraAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        // LOC3.8
+        audioSource.clip = enunosAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        // LOC3.9 → mostrar botón continuar
+        audioSource.clip = continuarPaso4Audio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        continuarPaso4Button.SetActive(true);
+        Debug.Log("LOC3.9 completado: mostrar botón 'Continuar'.");
     }
 
     void PlayCurrentAudio()
