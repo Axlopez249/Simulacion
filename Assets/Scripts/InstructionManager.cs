@@ -25,8 +25,18 @@ public class InstructionManager : MonoBehaviour
 
     private int currentInstruction = 0;
 
+    [Header("Paso 2: Arritmia")]
+    [Header("Objetos")]
     public GameObject corazonsano;
     public GameObject corazonsanoArritmia;
+
+    [Header("Botones")]
+    // Estos botones se colocan en la UI encima de cada corazón
+    public GameObject botonIzquierdo;
+    public GameObject botonDerecho;
+    public GameObject continuarPaso3Button;
+
+    [Header("Audios")]
     public AudioClip frenteAudio; // LOC2.1
     public AudioClip asimpleVistaAudio;
     public AudioClip observeAudio;       // LOC2.3
@@ -38,29 +48,45 @@ public class InstructionManager : MonoBehaviour
     public AudioClip correctoAudio;   // LOC2.6a
     public AudioClip incorrectoAudio; // LOC2.6b
     public AudioClip uncorazonsanoAudio;  // LOC2.7
-
-    // Estos botones se colocan en la UI encima de cada corazón
-    public GameObject botonIzquierdo;
-    public GameObject botonDerecho;
-
     public AudioClip cuandoapareceAudio;
     public AudioClip muchasvecesAudio;
     public AudioClip realizaremosAudio;
     public AudioClip continuarPaso3Audio;
 
-    public GameObject continuarPaso3Button;
-
     //paso3
+    [Header("Paso 3: Introducción dispositivo")]
+
+    [Header("Objetos")]
     public GameObject hativ; // Para mostrar el dispositivo Hativ
+
+
+    [Header("Botones")]
+    public GameObject continuarPaso4Button;
+
+
+    [Header("Audios")]
     public AudioClip ahoraHativAudio; // LOC3.1
     public AudioClip esteDispositivoAudio; // LOC3.2
     public AudioClip piernaAudio; // LOC3.3
     public AudioClip pulgaresAudio, acontinuacionAudio, asielsistemaAudio, mientrasrealizaAudio, estoayudaraAudio, enunosAudio, continuarPaso4Audio;
 
+    [Header("Videos")]
     public GameObject videoPulgares; // Para mostrar el video de los pulgares
     public GameObject videoTobillo; // Para mostrar el video del tobillo
-    public GameObject videoPiernaCruzada; // Para mostrar la pierna cruzada 
-    public GameObject continuarPaso4Button;
+    public GameObject videoPiernaCruzada; // Para mostrar la pierna cruzada
+
+    [Header("Paso 4: Medición")]
+    [Header("Audios")]
+    public AudioClip ahoraSuturno;
+    public AudioClip crucePierna;
+    public AudioClip frenteAusted;
+    public AudioClip zonasIluminadas;
+    public AudioClip paraTomar;
+    public AudioClip seAjustara;
+
+    [Header("Botones")]
+    public GameObject continuarPaso5Button;
+
     void Start()
     {
         // Cuando el video termine
@@ -274,7 +300,9 @@ public class InstructionManager : MonoBehaviour
     public void OnContinuarClicked3()
     {
         Debug.Log("Botón Continuar presionado → iniciar LOC3.");
-        StartLOC3(); // Aquí enganchás con el siguiente bloque
+        StopAllCoroutines(); // Detener cualquier corrutina anterior
+        audioSource.Stop(); // Detener audio que esté sonando
+        StartLOC3();
     }
 
     public void StartLOC3()
@@ -356,6 +384,70 @@ public class InstructionManager : MonoBehaviour
 
         continuarPaso4Button.SetActive(true);
         Debug.Log("LOC3.9 completado: mostrar botón 'Continuar'.");
+    }
+
+    public void OnContinuarClicked4()
+    {
+        Debug.Log("Botón Continuar presionado → iniciar LOC4.");
+        StopAllCoroutines(); // Detener cualquier corrutina anterior
+        audioSource.Stop(); // Detener audio que esté sonando
+        StartLOC4();
+    }
+
+    public void StartLOC4()
+    {
+        StartCoroutine(PlayLOC4Sequence());
+    }
+
+    IEnumerator PlayLOC4Sequence()
+    {
+        continuarPaso4Button.SetActive(false);
+
+        // LOC4.1
+        audioSource.clip = ahoraSuturno;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC4.1 completado.");
+
+        // LOC4.2 → activar video de pierna cruzada
+        audioSource.clip = crucePierna;
+        audioSource.Play();
+        videoPiernaCruzada.SetActive(true);
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC4.2 completado.");
+
+        // LOC4.3 → ocultar video y continuar
+        yield return new WaitForSeconds(1f); // Pequeña pausa para transición
+        audioSource.clip = frenteAusted;
+        audioSource.Play();
+        videoPiernaCruzada.SetActive(false); // Ocultar video de pierna cruzada
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC4.3 completado.");
+
+        // LOC4.4
+        audioSource.clip = zonasIluminadas;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC4.4 completado.");
+
+        // LOC4.5
+        audioSource.clip = paraTomar;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC4.5 completado.");
+
+        // LOC4.6
+        audioSource.clip = seAjustara;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        Debug.Log("LOC4.6 completado: mostrar botón 'Continuar'.");
+        continuarPaso5Button.SetActive(true);
     }
 
     void PlayCurrentAudio()

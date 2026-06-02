@@ -1807,6 +1807,16 @@ PrefabInstance:
     - {fileID: 7863298588065907362, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
     - {fileID: -3945556575091461137, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
     - {fileID: 3765739841185116597, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 7441189195826355505, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 7621829897208115556, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 5548641181318582115, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 9059956942748498925, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 8807128236143984656, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 3305490230648576144, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 2982153217933790380, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 8393979203135798191, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: -5488863658863254434, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 3014315471340461796, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
@@ -1905,6 +1915,16 @@ PrefabInstance:
     - {fileID: 7863298588065907362, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
     - {fileID: -3945556575091461137, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
     - {fileID: 3765739841185116597, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 7441189195826355505, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 7621829897208115556, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 5548641181318582115, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 9059956942748498925, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 8807128236143984656, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 3305490230648576144, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 2982153217933790380, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 8393979203135798191, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: -5488863658863254434, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
+    - {fileID: 3014315471340461796, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 83ac9af652ffb234da73e397e2c2da0a, type: 3}
@@ -2194,6 +2214,7 @@ GameObject:
   - component: {fileID: 635959248}
   - component: {fileID: 635959247}
   - component: {fileID: 635959253}
+  - component: {fileID: 635959254}
   m_Layer: 0
   m_Name: 'hativ p30 '
   m_TagString: MedicalDevice
@@ -2471,6 +2492,105 @@ MonoBehaviour:
   normalMannequin: {fileID: 1969043350}
   crossedLegMannequin: {fileID: 1273586215}
   ankleZone: {fileID: 54592579}
+  audioSource: {fileID: 635959254}
+  sensoresAudio: {fileID: 8300000, guid: a41220eeb555d4c48a0051842e74ff1e, type: 3}
+--- !u!82 &635959254
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635959246}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: a41220eeb555d4c48a0051842e74ff1e, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &662732372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,6 +3788,9 @@ MonoBehaviour:
   heartbeatAudio: {fileID: 0}
   corazonsano: {fileID: 502736732}
   corazonsanoArritmia: {fileID: 499168080}
+  botonIzquierdo: {fileID: 677620869}
+  botonDerecho: {fileID: 2141498579}
+  continuarPaso3Button: {fileID: 1954526674}
   frenteAudio: {fileID: 8300000, guid: 77632d27d025fba4988ff70925c22d12, type: 3}
   asimpleVistaAudio: {fileID: 8300000, guid: 9be4024f96d96284fb75526aa3387039, type: 3}
   observeAudio: {fileID: 8300000, guid: 1850060d2f6e3af4c88be1c0c749bfb1, type: 3}
@@ -3679,14 +3802,12 @@ MonoBehaviour:
   correctoAudio: {fileID: 8300000, guid: 127bdf6ba41f4f242a67c03d1f3a41c2, type: 3}
   incorrectoAudio: {fileID: 8300000, guid: 7c9df9fdbe9bd104389c6a7765a2285b, type: 3}
   uncorazonsanoAudio: {fileID: 8300000, guid: a7efddb01e607f641959fe42064a3d71, type: 3}
-  botonIzquierdo: {fileID: 677620869}
-  botonDerecho: {fileID: 2141498579}
   cuandoapareceAudio: {fileID: 8300000, guid: ba4253f29c10ea045a16d94e6484ee8d, type: 3}
   muchasvecesAudio: {fileID: 8300000, guid: 11d559645d09bab4da2529db240dabf6, type: 3}
   realizaremosAudio: {fileID: 8300000, guid: cfcff412718afdd499e2f9c509a476d5, type: 3}
   continuarPaso3Audio: {fileID: 8300000, guid: 6f3ffb9114d22b74f875dc0a8a387cc8, type: 3}
-  continuarPaso3Button: {fileID: 1954526674}
   hativ: {fileID: 635959246}
+  continuarPaso4Button: {fileID: 2013111169}
   ahoraHativAudio: {fileID: 8300000, guid: b0ac6d85c7b85c74382cee11964beace, type: 3}
   esteDispositivoAudio: {fileID: 8300000, guid: 3d3b2a9ee4a3cd34591e8e351624eb3c, type: 3}
   piernaAudio: {fileID: 8300000, guid: 94eab286fdadabb41a799d8ef0ebb34b, type: 3}
@@ -3700,7 +3821,13 @@ MonoBehaviour:
   videoPulgares: {fileID: 891200761}
   videoTobillo: {fileID: 1704189904}
   videoPiernaCruzada: {fileID: 1546262610}
-  continuarPaso4Button: {fileID: 2013111169}
+  ahoraSuturno: {fileID: 8300000, guid: 9a614d99d471cac41951a024f2ad8818, type: 3}
+  crucePierna: {fileID: 8300000, guid: 750c17be635f3a142b65014343c17eb9, type: 3}
+  frenteAusted: {fileID: 8300000, guid: bb9671ae91f5bc243a1da4b9f30f00fb, type: 3}
+  zonasIluminadas: {fileID: 8300000, guid: b3be912fded826d488c9600f27c61b31, type: 3}
+  paraTomar: {fileID: 8300000, guid: ca3436865acd7584ba88d34d3a93c632, type: 3}
+  seAjustara: {fileID: 8300000, guid: 4a9c48d4442045b4788a827705e86e63, type: 3}
+  continuarPaso5Button: {fileID: 0}
 --- !u!82 &1079008969
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6868,6 +6995,9 @@ MonoBehaviour:
   heartbeatAudio: {fileID: 0}
   corazonsano: {fileID: 0}
   corazonsanoArritmia: {fileID: 0}
+  botonIzquierdo: {fileID: 0}
+  botonDerecho: {fileID: 0}
+  continuarPaso3Button: {fileID: 0}
   frenteAudio: {fileID: 0}
   asimpleVistaAudio: {fileID: 0}
   observeAudio: {fileID: 0}
@@ -6879,14 +7009,12 @@ MonoBehaviour:
   correctoAudio: {fileID: 0}
   incorrectoAudio: {fileID: 0}
   uncorazonsanoAudio: {fileID: 0}
-  botonIzquierdo: {fileID: 0}
-  botonDerecho: {fileID: 0}
   cuandoapareceAudio: {fileID: 0}
   muchasvecesAudio: {fileID: 0}
   realizaremosAudio: {fileID: 0}
   continuarPaso3Audio: {fileID: 0}
-  continuarPaso3Button: {fileID: 0}
   hativ: {fileID: 0}
+  continuarPaso4Button: {fileID: 0}
   ahoraHativAudio: {fileID: 0}
   esteDispositivoAudio: {fileID: 0}
   piernaAudio: {fileID: 0}
@@ -6900,7 +7028,13 @@ MonoBehaviour:
   videoPulgares: {fileID: 0}
   videoTobillo: {fileID: 0}
   videoPiernaCruzada: {fileID: 0}
-  continuarPaso4Button: {fileID: 0}
+  ahoraSuturno: {fileID: 0}
+  crucePierna: {fileID: 0}
+  frenteAusted: {fileID: 0}
+  zonasIluminadas: {fileID: 0}
+  paraTomar: {fileID: 0}
+  seAjustara: {fileID: 0}
+  continuarPaso5Button: {fileID: 0}
 --- !u!82 &1692802901
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8937,7 +9071,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1079008968}
         m_TargetAssemblyTypeName: InstructionManager, Assembly-CSharp
-        m_MethodName: StartLOC3
+        m_MethodName: StartLOC4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
