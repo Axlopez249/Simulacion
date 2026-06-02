@@ -2018,13 +2018,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   features:
   - {fileID: 2109802480353105152}
-<<<<<<< Updated upstream
   - {fileID: -5011284457601267735}
   - {fileID: -4414080133458148426}
-=======
-  - {fileID: 484161490036689224}
-  - {fileID: -3688430105879480005}
->>>>>>> Stashed changes
   - {fileID: -4954635989753619146}
   - {fileID: -7704693531768791874}
   - {fileID: 8023257435433845108}
@@ -2035,11 +2030,7 @@ MonoBehaviour:
   - {fileID: -7979023648139240403}
   - {fileID: -7340524804024996456}
   - {fileID: 274347273564094617}
-<<<<<<< Updated upstream
   - {fileID: -6402952714929163438}
-=======
-  - {fileID: -694691595379029039}
->>>>>>> Stashed changes
   - {fileID: -1528611375384339237}
   - {fileID: -7191854824877509086}
   - {fileID: 8007622838083529755}

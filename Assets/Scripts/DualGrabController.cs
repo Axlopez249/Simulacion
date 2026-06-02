@@ -14,6 +14,10 @@ public class DualGrabController : MonoBehaviour
 
     public GameObject ankleZone;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip sensoresAudio;
+
     private bool alreadyActivated = false;
 
     void Start()
@@ -41,6 +45,13 @@ public class DualGrabController : MonoBehaviour
         crossedLegMannequin.SetActive(true);
 
         ankleZone.SetActive(true);
+
+        // Reproducir audio "sensores"
+        if(audioSource != null && sensoresAudio != null)
+        {
+            audioSource.clip = sensoresAudio;
+            audioSource.Play();
+        }
 
         Debug.Log("ANKLE ZONE ACTIVADA");
     }
