@@ -18,6 +18,11 @@ public class DualGrabController : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip sensoresAudio;
 
+    [Header("Pulgares zonas")]
+    public GameObject thumbLeftZone;
+    public GameObject thumbRightZone;
+
+
     private bool alreadyActivated = false;
 
     void Start()
@@ -27,6 +32,10 @@ public class DualGrabController : MonoBehaviour
         crossedLegMannequin.SetActive(false);
 
         ankleZone.SetActive(false);
+        
+        thumbLeftZone.SetActive(false);
+        
+        thumbRightZone.SetActive(false);
 
         grabInteractable.selectEntered.AddListener(OnGrabbed);
     }
@@ -46,6 +55,10 @@ public class DualGrabController : MonoBehaviour
 
         ankleZone.SetActive(true);
 
+        // Apagar zonas de pulgar al agarrar
+        thumbLeftZone.SetActive(false);
+        thumbRightZone.SetActive(false);    
+
         // Reproducir audio "sensores"
         if(audioSource != null && sensoresAudio != null)
         {
@@ -55,4 +68,12 @@ public class DualGrabController : MonoBehaviour
 
         Debug.Log("ANKLE ZONE ACTIVADA");
     }
+
+    public void ActivateThumbZones()
+    {
+        thumbLeftZone.SetActive(true);
+        thumbRightZone.SetActive(true);
+        Debug.Log("Thumb zones activadas.");
+    }
+
 }

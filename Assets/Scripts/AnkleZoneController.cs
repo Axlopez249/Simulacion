@@ -14,11 +14,21 @@ public class AnkleZoneController : MonoBehaviour
     public AudioSource audioSource;
 
     [Header("Audios")]
+    public AudioClip heartbeatAudio;
     public AudioClip posicionIdealAudio;
 
     public AudioClip mantenerEstableAudio;
 
     public AudioClip lecturaEnProgresoAudio;
+
+    public AudioClip mantenerPosicionAudio; // LOC6.5a
+    public AudioClip colocarDispositivoAudio; // LOC7.2
+    public AudioClip mantenerEstableExtraAudio; // LOC7.3
+    public AudioClip mostrarECGAudio; // LOC7.4
+    public AudioClip medicionComenzadaAudio; // LOC7.5
+    public AudioClip mantenerUnosSegundosAudio; // LOC8.5
+    public AudioClip mostrarAvanceAudio; // LOC8.7
+
 
     [Header("Magnet Effect")]
     public float snapSpeed = 5f;
@@ -27,11 +37,20 @@ public class AnkleZoneController : MonoBehaviour
 
     private Transform currentDevice;
 
+    [Header("Maniquíes y zonas")]
+    public GameObject normalMannequin;
+    public GameObject crossedLegMannequin;
+    public GameObject ankleZone;
+
     void Start()
     {
         // El panel inicia apagado
         ecgPanel.SetActive(false);
+        videoPlayer.loopPointReached += OnVideoFinished;
     }
+
+    public InstructionManager instructionManager; // referencia al manager
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -107,43 +126,86 @@ public class AnkleZoneController : MonoBehaviour
         // Esperar audio 1
         yield return new WaitForSeconds(posicionIdealAudio.length);
 
-        // Pausa natural
-        yield return new WaitForSeconds(3f);
-
-        // Verificar si sigue en el tobillo
-        if(!deviceInside)
-            yield break;
-
-        // Audio 2
-        audioSource.clip = mantenerEstableAudio;
-
-        audioSource.Play();
-
-        // Esperar audio 2
-        yield return new WaitForSeconds(mantenerEstableAudio.length);
-
-        // Verificar nuevamente
-        if(!deviceInside)
-            yield break;
-
-        // Mostrar panel ECG
-        ecgPanel.SetActive(true);
-
-        // Reproducir video
-        videoPlayer.Play();
-
-        Debug.Log("SIMULACIÓN INICIADA");
-
-        // Esperar 2 segundos
+         // Pausa natural
         yield return new WaitForSeconds(2f);
 
-        // Verificar nuevamente
-        if(!deviceInside)
-            yield break;
+        if(!deviceInside) yield break;
 
-        // Audio lectura en progreso
-        audioSource.clip = lecturaEnProgresoAudio;
-
+        // Audio 2: mantener estable
+        audioSource.clip = mantenerEstableAudio;
         audioSource.Play();
+        yield return new WaitForSeconds(mantenerEstableAudio.length);
+
+        if(!deviceInside) yield break;
+
+        // Mostrar panel ECG y video
+        ecgPanel.SetActive(true);
+        audioSource.clip = heartbeatAudio; 
+        audioSource.Play();
+        videoPlayer.Play();
+        Debug.Log("SIMULACIÓN INICIADA");
+
+        // Audio 3: mostrar ECG
+        audioSource.clip = mostrarECGAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(mostrarECGAudio.length);
+
+        if(!deviceInside) yield break;
+
+        // Audio 4: medición comenzó
+        audioSource.clip = medicionComenzadaAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(medicionComenzadaAudio.length);
+
+        if(!deviceInside) yield break;
+
+        // Audio 5: mantener unos segundos más
+        audioSource.clip = mantenerUnosSegundosAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(mantenerUnosSegundosAudio.length);
+
+        if(!deviceInside) yield break;
+
+        // Audio 6: lectura en progreso (primera vez)
+        yield return new WaitForSeconds(2f);
+        audioSource.clip = lecturaEnProgresoAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(5f);
+
+        if(!deviceInside) yield break;
+
+        // Audio 7: lectura en progreso (segunda vez, refuerzo)
+        audioSource.clip = lecturaEnProgresoAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(5f);
+
+        if(!deviceInside) yield break;
+
+        // Audio 8: mostrar avance (LOC8.7)
+        audioSource.clip = mostrarAvanceAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(mostrarAvanceAudio.length);
+
+        Debug.Log("SIMULACIÓN COMPLETA");
     }
+
+    void OnVideoFinished(VideoPlayer vp)
+    {
+        Debug.Log("VIDEO TERMINADO → cerrar simulación");
+
+        // Apagar ECG y zona
+        ecgPanel.SetActive(false);
+        ankleZone.SetActive(false);
+
+        // Cambiar maniquíes
+        crossedLegMannequin.SetActive(false);
+        normalMannequin.SetActive(true);
+
+        // Notificar al InstructionManager para que continúe con LOC9.x y LOC10.x
+        if(instructionManager != null)
+        {
+            instructionManager.OnSimulationCompleted();
+        }
+    }
+
 }

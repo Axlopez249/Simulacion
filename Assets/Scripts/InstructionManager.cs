@@ -5,25 +5,30 @@ using System.Collections;
 public class InstructionManager : MonoBehaviour
 {
     [Header("Main UI")]
-    public GameObject mainMenuPanel;
-
-    public GameObject instructionsContainer;
-
     public GameObject palpitacionPanel;
+    public GameObject botonPrueba;
+    public GameObject cubo;
+    public GameObject cubo2;
+    public GameObject botonPaso2;
+    
+    public GameObject mesa;
 
-    [Header("Instructions")]
-    public GameObject[] instructionPanels;
-
-    public AudioClip[] instructionAudios;
-
+    [Header("Audio")]
+    public AudioClip bienvenida;
+    public AudioClip primeroMostraremos;
+    public AudioClip paraSeleccionar;
+    public AudioClip audioAlClickear;
+    public AudioClip paraAgarrar;
+    public AudioClip audioSoltar;
+    public AudioClip puedeSujetarlo;
+    public AudioClip paraMayorComodidad;
+    public AudioClip todoListoAudio;
+    public AudioClip cuandoesteListoAudio;
     public AudioSource audioSource;
 
     [Header("Simulation")]
     public VideoPlayer videoPlayer;
-
     public AudioSource heartbeatAudio;
-
-    private int currentInstruction = 0;
 
     [Header("Paso 2: Arritmia")]
     [Header("Objetos")]
@@ -58,6 +63,7 @@ public class InstructionManager : MonoBehaviour
 
     [Header("Objetos")]
     public GameObject hativ; // Para mostrar el dispositivo Hativ
+    public GameObject hativSinFuncionalidad; // Para mostrar el video de los pulgares
 
 
     [Header("Botones")]
@@ -84,72 +90,239 @@ public class InstructionManager : MonoBehaviour
     public AudioClip paraTomar;
     public AudioClip seAjustara;
 
-    [Header("Botones")]
-    public GameObject continuarPaso5Button;
+    [Header("Resultados")]
+
+    [Header("Objetos")]
+
+    public GameObject resultadosPanel;
+    public GameObject terminarExamenButton;
+
+    [Header("Audios")]
+
+    // Audios LOC9.x
+    public AudioClip medicionFinalizadaAudio;   // LOC9.1
+    public AudioClip colocarMesaAudio;          // LOC9.2
+    public AudioClip soltarBotonXAudio;         // LOC9.3
+    public AudioClip resultadosExamenAudio;     // LOC9.4
+    public AudioClip terminarExamenAudio;       // LOC9.5
+
+    // Audios LOC10.x
+    public AudioClip revisarResultadosAudio;    // LOC10.1
+    public AudioClip edadCardiacaAudio;         // LOC10.2
+    public AudioClip alteracionesAudio;         // LOC10.3
+    public AudioClip actividadAltaAudio;        // LOC10.4
+    public AudioClip recomendacionAudio;        // LOC10.5
+    public AudioClip graciasAudio;              // LOC10.6
 
     void Start()
     {
         // Cuando el video termine
-        videoPlayer.loopPointReached += EndVideo;
+        //videoPlayer.loopPointReached += EndVideo;
 
         // Estado inicial
-        mainMenuPanel.SetActive(true);
+        //palpitacionPanel.SetActive(false);
 
-        instructionsContainer.SetActive(false);
-
-        palpitacionPanel.SetActive(false);
+        // Reproducir audio de bienvenida
+        StartCoroutine(PlayWelcomeAudio());
     }
 
-    public void StartInstructions()
+    // lógica del cubo
+    public void OnCubeGrabbed()
     {
-        // Ocultar menú principal
-        mainMenuPanel.SetActive(false);
-
-        // Mostrar contenedor de instrucciones
-        instructionsContainer.SetActive(true);
-
-        // Reiniciar índice
-        currentInstruction = 0;
-
-        // Apagar todos los paneles primero
-        for (int i = 0; i < instructionPanels.Length; i++)
+        if (audioAlClickear != null && audioSource != null)
         {
-            instructionPanels[i].SetActive(false);
+            audioSource.Stop(); // 🔹 detener cualquier audio previo
+            audioSource.clip = audioAlClickear;
+            audioSource.Play();
+
+            // Usamos una corrutina que espera la duración real del clip
+            StartCoroutine(PlayAfterAudio(audioAlClickear, PlayDropInstruction));
+        }
+    }
+
+    IEnumerator PlayAfterAudio(AudioClip clip, System.Action nextStep)
+    {
+        if (clip != null)
+        {
+            yield return new WaitForSeconds(clip.length - 0.05f);
+            nextStep?.Invoke();
+        }
+    }
+
+    void PlayDropInstruction()
+    {
+        if (audioSoltar != null && audioSource != null)
+        {
+            audioSource.Stop();
+            audioSource.clip = audioSoltar;
+            audioSource.Play();
+        }
+    }
+
+    public void OnCubeReleased()
+    {
+        // Usuario suelta el cubo → reproducir "Muy bien" otra vez
+        if (audioAlClickear != null && audioSource != null)
+        {
+            audioSource.clip = audioAlClickear;
+            audioSource.Play();
+            StartCoroutine(WaitForAudioToEnd(audioSource.clip.length, () => StartCoroutine(ContinueAfterCubeSequence())));
+        }
+    }
+
+    IEnumerator ContinueAfterCubeSequence()
+    {
+        cubo.SetActive(false); // Ocultar el cubo después de soltarlo
+        cubo2.SetActive(true); // Mostrar el segundo cubo
+        // Aquí continúan las siguientes locuciones del entrenamiento
+        if (puedeSujetarlo != null && audioSource != null)
+        {
+            audioSource.clip = puedeSujetarlo;
+            audioSource.Play();
+            // Puedes encadenar más audios o activar objetos aquí
+            yield return new WaitForSeconds(audioSource.clip.length);
         }
 
-        // Mostrar primera instrucción
-        instructionPanels[currentInstruction].SetActive(true);
+        //Para mayor comodidad audio
+        if (paraMayorComodidad != null && audioSource != null)
+        {
+            audioSource.clip = paraMayorComodidad;
+            audioSource.Play();
+            // Puedes encadenar más audios o activar objetos aquí
+            yield return new WaitForSeconds(audioSource.clip.length);
+        }
 
-        // Reproducir audio correspondiente
-        PlayCurrentAudio();
+        //Todo Listo audio
+        if (todoListoAudio != null && audioSource != null)
+        {
+            audioSource.clip = todoListoAudio;
+            audioSource.Play();
+            // Puedes encadenar más audios o activar objetos aquí
+            yield return new WaitForSeconds(audioSource.clip.length);
+        }
+
+        //Cuando esté listo audio
+        if (cuandoesteListoAudio != null && audioSource != null)
+        {
+            audioSource.clip = cuandoesteListoAudio;
+            audioSource.Play();
+            // Puedes encadenar más audios o activar objetos aquí
+            yield return new WaitForSeconds(audioSource.clip.length);
+        }
+
+        botonPaso2.SetActive(true); // Mostrar el botón para avanzar al paso 2
+
     }
 
-    public void NextInstruction()
+
+    IEnumerator PlayWelcomeAudio()
     {
-        // Apagar instrucción actual
-        instructionPanels[currentInstruction].SetActive(false);
-
-        // Siguiente instrucción
-        currentInstruction++;
-
-        // Si aún hay instrucciones
-        if (currentInstruction < instructionPanels.Length)
+        // Validar que audioSource exista
+        if (audioSource == null)
         {
-            instructionPanels[currentInstruction].SetActive(true);
+            Debug.LogError("AudioSource no está asignado");
+            yield break;
+        }
 
-            PlayCurrentAudio();
+        // Reproducir primer audio (bienvenida)
+        if (bienvenida != null)
+        {
+            audioSource.clip = bienvenida;
+            audioSource.Play();
+            yield return new WaitForSeconds(bienvenida.length - 0.05f);
+        }
+
+        // Reproducir segundo audio (primeroMostraremos)
+        if (primeroMostraremos != null)
+        {
+            audioSource.clip = primeroMostraremos;
+            audioSource.Play();
+            yield return new WaitForSeconds(primeroMostraremos.length - 0.05f);
         }
         else
         {
-            // Iniciar simulación
-            StartSimulation();
+            Debug.LogWarning("primeroMostraremos no está asignado");
+        }
+
+        // Reproducir tercer audio
+        if (paraSeleccionar != null)
+        {
+            audioSource.clip = paraSeleccionar;
+            audioSource.Play();
+            
+            // Activar el botón de prueba cuando comienza el audio
+            if (botonPrueba != null)
+            {
+                botonPrueba.SetActive(true);
+            }
+            
+            yield return new WaitForSeconds(paraSeleccionar.length - 0.05f);
+        }
+        else
+        {
+            Debug.LogWarning("paraSeleccionar no está asignado");
         }
     }
-    public void StartLOC2Step1()
-    {
-        // Ocultar instrucciones
-        instructionsContainer.SetActive(false);
 
+    public void OnBotonPruebaClicked()
+    {
+        // Desactivar el botón
+        if (botonPrueba != null)
+        {
+            botonPrueba.SetActive(false);
+        }
+
+        // Reproducir audio al hacer click
+        if (audioAlClickear != null && audioSource != null)
+        {
+            audioSource.clip = audioAlClickear;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("audioAlClickear no está asignado");
+        }
+
+        // Activar el cubo
+        if (cubo != null)
+        {
+            cubo.SetActive(true);
+        }
+
+        // continuar con los audios de la locución después de un pequeño delay para que el usuario escuche el audio al clickear
+        StartCoroutine(ContinueAfterClickAudio());
+        
+    }
+
+    IEnumerator ContinueAfterClickAudio()
+    {
+        // Esperar a que termine el audio al clickear
+        yield return new WaitForSeconds(paraAgarrar.length - 0.05f);
+
+        // continuacion de audio paso 1
+        if (paraAgarrar != null && audioSource != null)
+        {
+            audioSource.clip = paraAgarrar;
+            audioSource.Play();
+        }
+    }
+
+        // Método público que se llama desde el botón
+    public void StartLOC2Step1()
+    {   
+        cubo2.SetActive(false); // Ocultar el cubo después de soltarlo
+        mesa.SetActive(false); // Ocultar la mesa para el paso 2
+        // Aquí no usamos yield, solo lanzamos la corrutina
+        StartCoroutine(StartLOC2Step1Coroutine());
+    }
+
+    // Corrutina privada con la lógica paso a paso
+    private IEnumerator StartLOC2Step1Coroutine()
+    {
+        botonPaso2.SetActive(false); // Ocultar el botón de paso 2
+
+        yield return new WaitForSeconds(0.5f); // Pequeña pausa para transición
+        
         //Activar corazones sanos y con arritmia
         corazonsano.SetActive(true);
         corazonsanoArritmia.SetActive(true);
@@ -307,13 +480,14 @@ public class InstructionManager : MonoBehaviour
 
     public void StartLOC3()
     {
+        mesa.SetActive(true); // Asegurarse de ocultar la mesa para el paso 3
         StartCoroutine(PlayLOC3Sequence());
     }
 
     IEnumerator PlayLOC3Sequence()
     {
         // LOC3.1 → introducción a la medición
-        hativ.SetActive(true); // Mostrar el dispositivo Hativ
+        hativSinFuncionalidad.SetActive(true); // Mostrar el dispositivo Hativ
         continuarPaso3Button.SetActive(false); // Asegurarse de ocultar el botón
         audioSource.clip = ahoraHativAudio;
         audioSource.Play();
@@ -402,7 +576,8 @@ public class InstructionManager : MonoBehaviour
     IEnumerator PlayLOC4Sequence()
     {
         continuarPaso4Button.SetActive(false);
-
+        hativSinFuncionalidad.SetActive(false); // Asegurarse de ocultar el dispositivo sin funcionalidad
+        hativ.SetActive(true); // Mostrar el dispositivo Hativ con funcionalidad (si es diferente)
         // LOC4.1
         audioSource.clip = ahoraSuturno;
         audioSource.Play();
@@ -430,6 +605,10 @@ public class InstructionManager : MonoBehaviour
         // LOC4.4
         audioSource.clip = zonasIluminadas;
         audioSource.Play();
+        
+        // Activar las zonas de pulgar en el dispositivo
+        FindObjectOfType<DualGrabController>().ActivateThumbZones();
+        
         yield return new WaitForSeconds(audioSource.clip.length);
 
         Debug.Log("LOC4.4 completado.");
@@ -447,27 +626,80 @@ public class InstructionManager : MonoBehaviour
         yield return new WaitForSeconds(audioSource.clip.length);
 
         Debug.Log("LOC4.6 completado: mostrar botón 'Continuar'.");
-        continuarPaso5Button.SetActive(true);
     }
 
-    void PlayCurrentAudio()
+    public void OnSimulationCompleted()
     {
-        // Validación
-        if (currentInstruction >= instructionAudios.Length)
-            return;
+        Debug.Log("Simulación completada → iniciar secuencia final");
 
-        audioSource.Stop();
+        StartCoroutine(PlayFinalSequence());
+    }
 
-        audioSource.clip = instructionAudios[currentInstruction];
-
+    IEnumerator PlayFinalSequence()
+    {
+        audioSource.clip = medicionFinalizadaAudio;
         audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = colocarMesaAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = soltarBotonXAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = resultadosExamenAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = terminarExamenAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        terminarExamenButton.SetActive(true);
+    }
+
+    public void OnTerminarExamenClicked()
+    {
+        terminarExamenButton.SetActive(false);
+        resultadosPanel.SetActive(true);
+
+        StartCoroutine(PlayResultsSequence());
+    }
+
+    IEnumerator PlayResultsSequence()
+    {
+        audioSource.clip = revisarResultadosAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = edadCardiacaAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = alteracionesAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = actividadAltaAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = recomendacionAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        audioSource.clip = graciasAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        resultadosPanel.SetActive(false);
+        Debug.Log("EXPERIENCIA COMPLETADA");
     }
 
     void StartSimulation()
     {
-        // Ocultar instrucciones
-        instructionsContainer.SetActive(false);
-
         // Mostrar panel de simulación
         palpitacionPanel.SetActive(true);
 
