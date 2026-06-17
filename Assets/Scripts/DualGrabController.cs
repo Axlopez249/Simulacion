@@ -9,71 +9,75 @@ public class DualGrabController : MonoBehaviour
 
     [Header("Scene Objects")]
     public GameObject normalMannequin;
-
     public GameObject crossedLegMannequin;
-
     public GameObject ankleZone;
-
-    [Header("Audio")]
-    public AudioSource audioSource;
-    public AudioClip sensoresAudio;
 
     [Header("Pulgares zonas")]
     public GameObject thumbLeftZone;
     public GameObject thumbRightZone;
 
-
-    private bool alreadyActivated = false;
+    public bool leftGrabbed = false;
+    public bool rightGrabbed = false;
 
     void Start()
     {
         normalMannequin.SetActive(true);
-
         crossedLegMannequin.SetActive(false);
-
         ankleZone.SetActive(false);
-        
+
         thumbLeftZone.SetActive(false);
-        
         thumbRightZone.SetActive(false);
 
         grabInteractable.selectEntered.AddListener(OnGrabbed);
+        grabInteractable.selectExited.AddListener(OnReleased);
     }
 
     void OnGrabbed(SelectEnterEventArgs args)
     {
-        // evitar repetir
-        if(alreadyActivated)
-            return;
+        string tag = args.interactorObject.transform.tag;
 
-        alreadyActivated = true;
-
-        // SOLO cambiar maniquí
-        normalMannequin.SetActive(false);
-
-        crossedLegMannequin.SetActive(true);
-
-        ankleZone.SetActive(true);
-
-        // Apagar zonas de pulgar al agarrar
-        thumbLeftZone.SetActive(false);
-        thumbRightZone.SetActive(false);    
-
-        // Reproducir audio "sensores"
-        if(audioSource != null && sensoresAudio != null)
+        if (tag == "LeftController")
         {
-            audioSource.clip = sensoresAudio;
-            audioSource.Play();
+            leftGrabbed = true;
+            thumbLeftZone.SetActive(false); // apagar zona izquierda al agarrar
+            Debug.Log("Pulgar izquierdo agarrado");
         }
 
-        Debug.Log("ANKLE ZONE ACTIVADA");
+        if (tag == "RightController")
+        {
+            rightGrabbed = true;
+            thumbRightZone.SetActive(false); // apagar zona derecha al agarrar
+            Debug.Log("Pulgar derecho agarrado");
+
+            if (leftGrabbed && rightGrabbed)
+            {
+                normalMannequin.SetActive(false);
+                crossedLegMannequin.SetActive(true);
+                ankleZone.SetActive(true);
+                Debug.Log("Ambos pulgares agarrados → tobillo habilitado");
+            }
+        }
     }
 
-    public void ActivateThumbZones()
+    void OnReleased(SelectExitEventArgs args)
+    {
+        string tag = args.interactorObject.transform.tag;
+
+        if (tag == "LeftController") leftGrabbed = false;
+        if (tag == "RightController") rightGrabbed = false;
+
+        Debug.Log("Se soltó un pulgar");
+    }
+
+    public void ActivateLeftThumbZone()
     {
         thumbLeftZone.SetActive(true);
-        thumbRightZone.SetActive(true);
-        Debug.Log("Thumb zones activadas.");
+        Debug.Log("Zona izquierda activada");
     }
 
+    public void ActivateRightThumbZone()
+    {
+        thumbRightZone.SetActive(true);
+        Debug.Log("Zona derecha activada");
+    }
 }

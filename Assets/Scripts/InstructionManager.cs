@@ -2,13 +2,16 @@ using UnityEngine;
 using UnityEngine.Video;
 using System.Collections;   
 
+
+
+
+
 public class InstructionManager : MonoBehaviour
 {
     [Header("Main UI")]
     public GameObject palpitacionPanel;
     public GameObject botonPrueba;
     public GameObject cubo;
-    public GameObject cubo2;
     public GameObject botonPaso2;
     
     public GameObject mesa;
@@ -20,7 +23,6 @@ public class InstructionManager : MonoBehaviour
     public AudioClip audioAlClickear;
     public AudioClip paraAgarrar;
     public AudioClip audioSoltar;
-    public AudioClip puedeSujetarlo;
     public AudioClip paraMayorComodidad;
     public AudioClip todoListoAudio;
     public AudioClip cuandoesteListoAudio;
@@ -43,6 +45,8 @@ public class InstructionManager : MonoBehaviour
 
     [Header("Audios")]
     public AudioClip frenteAudio; // LOC2.1
+
+    public AudioClip primeroAparaceAudio; // LOC2.2a
     public AudioClip asimpleVistaAudio;
     public AudioClip observeAudio;       // LOC2.3
     public AudioClip algoCambiaAudio;    // LOC2.4
@@ -73,13 +77,19 @@ public class InstructionManager : MonoBehaviour
     [Header("Audios")]
     public AudioClip ahoraHativAudio; // LOC3.1
     public AudioClip esteDispositivoAudio; // LOC3.2
-    public AudioClip piernaAudio; // LOC3.3
-    public AudioClip pulgaresAudio, acontinuacionAudio, asielsistemaAudio, mientrasrealizaAudio, estoayudaraAudio, enunosAudio, continuarPaso4Audio;
+    public AudioClip asielsistemaAudio, mientrasrealizaAudio, estoayudaraAudio, piernaAudio, pulgaresAudio, acontinuacionAudio, continuarPaso4Audio;
 
     [Header("Videos")]
     public GameObject videoPulgares; // Para mostrar el video de los pulgares
     public GameObject videoTobillo; // Para mostrar el video del tobillo
     public GameObject videoPiernaCruzada; // Para mostrar la pierna cruzada
+
+    [Header("Nuevos Audios Paso 3-4")]
+    public AudioClip piernaIzquierdaSobreDerechaAudio; 
+    public AudioClip sujeteIzquierdaAudio;
+    public AudioClip sujeteDerechaAudio;
+    public AudioClip noSoltarDispositivoAudio;
+    public AudioClip colocarEnTobilloAudio;
 
     [Header("Paso 4: Medición")]
     [Header("Audios")]
@@ -173,15 +183,6 @@ public class InstructionManager : MonoBehaviour
     IEnumerator ContinueAfterCubeSequence()
     {
         cubo.SetActive(false); // Ocultar el cubo después de soltarlo
-        cubo2.SetActive(true); // Mostrar el segundo cubo
-        // Aquí continúan las siguientes locuciones del entrenamiento
-        if (puedeSujetarlo != null && audioSource != null)
-        {
-            audioSource.clip = puedeSujetarlo;
-            audioSource.Play();
-            // Puedes encadenar más audios o activar objetos aquí
-            yield return new WaitForSeconds(audioSource.clip.length);
-        }
 
         //Para mayor comodidad audio
         if (paraMayorComodidad != null && audioSource != null)
@@ -310,7 +311,6 @@ public class InstructionManager : MonoBehaviour
         // Método público que se llama desde el botón
     public void StartLOC2Step1()
     {   
-        cubo2.SetActive(false); // Ocultar el cubo después de soltarlo
         mesa.SetActive(false); // Ocultar la mesa para el paso 2
         // Aquí no usamos yield, solo lanzamos la corrutina
         StartCoroutine(StartLOC2Step1Coroutine());
@@ -333,6 +333,10 @@ public class InstructionManager : MonoBehaviour
         audioSource.Play();
 
         Debug.Log("LOC2.1 reproducido: corazones aún desactivados.");
+
+        audioSource.Stop();
+        audioSource.clip = primeroAparaceAudio;
+        audioSource.Play();
 
         // Cuando termine el audio, pasar al paso 2
         StartCoroutine(WaitForAudioToEnd(audioSource.clip.length, StartLOC2Step2));
@@ -486,147 +490,79 @@ public class InstructionManager : MonoBehaviour
 
     IEnumerator PlayLOC3Sequence()
     {
-        // LOC3.1 → introducción a la medición
-        hativSinFuncionalidad.SetActive(true); // Mostrar el dispositivo Hativ
-        continuarPaso3Button.SetActive(false); // Asegurarse de ocultar el botón
+        hativSinFuncionalidad.SetActive(true);
+        continuarPaso3Button.SetActive(false);
+
+        // Audios iniciales
         audioSource.clip = ahoraHativAudio;
         audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length);
 
-        Debug.Log("LOC3.1 completado: listo para mostrar la interfaz de medición.");
-        Debug.Log("LOC3.1 completado.");
-
-        // LOC3.2 → solo audio
         audioSource.clip = esteDispositivoAudio;
         audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length);
 
-        Debug.Log("LOC3.2 completado.");
-
-        // LOC3.3 → activar video de doblar pierna
-        audioSource.clip = piernaAudio;
-        audioSource.Play();
-        videoPiernaCruzada.SetActive(true);
-        yield return new WaitForSeconds(audioSource.clip.length);
-
-        // LOC5.1 → colocar pulgares
-        yield return new WaitForSeconds(1f); // Pequeña pausa para transición
-        audioSource.clip = pulgaresAudio;
-        audioSource.Play();
-        videoPiernaCruzada.SetActive(false); // Ocultar video de pierna cruzada
-        videoPulgares.SetActive(true);
-        yield return new WaitForSeconds(audioSource.clip.length);
-
-        Debug.Log("LOC5.1 completado: videoPulgares activado.");
-
-        // LOC3.4 → contacto en tobillo
-        yield return new WaitForSeconds(1f); // Pequeña pausa para transición
-        audioSource.clip = acontinuacionAudio;
-        audioSource.Play();
-        videoPulgares.SetActive(false); // Ocultar video de pulgares
-        videoTobillo.SetActive(true);
-        yield return new WaitForSeconds(audioSource.clip.length);
-
-        Debug.Log("LOC3.4 completado: videoTobillo activado.");
-
-        // LOC3.5
-        yield return new WaitForSeconds(1f); // Pequeña pausa para transición
         audioSource.clip = asielsistemaAudio;
         audioSource.Play();
-        videoTobillo.SetActive(false); // Ocultar video de tobillo
         yield return new WaitForSeconds(audioSource.clip.length);
 
-        // LOC3.6
         audioSource.clip = mientrasrealizaAudio;
         audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length);
 
-        // LOC3.7
         audioSource.clip = estoayudaraAudio;
         audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length);
 
-        // LOC3.8
-        audioSource.clip = enunosAudio;
-        audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
-
-        // LOC3.9 → mostrar botón continuar
-        audioSource.clip = continuarPaso4Audio;
-        audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
-
-        continuarPaso4Button.SetActive(true);
-        Debug.Log("LOC3.9 completado: mostrar botón 'Continuar'.");
-    }
-
-    public void OnContinuarClicked4()
-    {
-        Debug.Log("Botón Continuar presionado → iniciar LOC4.");
-        StopAllCoroutines(); // Detener cualquier corrutina anterior
-        audioSource.Stop(); // Detener audio que esté sonando
-        StartLOC4();
-    }
-
-    public void StartLOC4()
-    {
-        StartCoroutine(PlayLOC4Sequence());
-    }
-
-    IEnumerator PlayLOC4Sequence()
-    {
-        continuarPaso4Button.SetActive(false);
-        hativSinFuncionalidad.SetActive(false); // Asegurarse de ocultar el dispositivo sin funcionalidad
-        hativ.SetActive(true); // Mostrar el dispositivo Hativ con funcionalidad (si es diferente)
-        // LOC4.1
-        audioSource.clip = ahoraSuturno;
-        audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
-
-        Debug.Log("LOC4.1 completado.");
-
-        // LOC4.2 → activar video de pierna cruzada
-        audioSource.clip = crucePierna;
+        // Pierna cruzada
+        audioSource.clip = piernaIzquierdaSobreDerechaAudio;
         audioSource.Play();
         videoPiernaCruzada.SetActive(true);
         yield return new WaitForSeconds(audioSource.clip.length);
+        videoPiernaCruzada.SetActive(false);
 
-        Debug.Log("LOC4.2 completado.");
+        hativSinFuncionalidad.SetActive(false);
+        hativ.SetActive(true);
 
-        // LOC4.3 → ocultar video y continuar
-        yield return new WaitForSeconds(1f); // Pequeña pausa para transición
-        audioSource.clip = frenteAusted;
+        // Audio y zona izquierda
+        audioSource.clip = sujeteIzquierdaAudio;
         audioSource.Play();
-        videoPiernaCruzada.SetActive(false); // Ocultar video de pierna cruzada
+        videoPulgares.SetActive(true);
+        hativ.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>().enabled = true;
+        FindObjectOfType<DualGrabController>().ActivateLeftThumbZone();
+
+        // Esperar hasta que realmente se agarre con la izquierda
+        yield return new WaitUntil(() => FindObjectOfType<DualGrabController>().leftGrabbed);
+
+        // Ahora sí apagar la zona izquierda
+        FindObjectOfType<DualGrabController>().thumbLeftZone.SetActive(false);
+
+        // Audio y zona derecha
+        audioSource.clip = sujeteDerechaAudio;
+        audioSource.Play();
+        FindObjectOfType<DualGrabController>().ActivateRightThumbZone();
+
+        // Esperar hasta que realmente se agarre con la derecha
+        yield return new WaitUntil(() => FindObjectOfType<DualGrabController>().rightGrabbed);
+
+        // Ahora sí apagar la zona derecha
+        FindObjectOfType<DualGrabController>().thumbRightZone.SetActive(false);
+
+        // Audio de no soltar
+        audioSource.clip = noSoltarDispositivoAudio;
+        audioSource.Play();
         yield return new WaitForSeconds(audioSource.clip.length);
 
-        Debug.Log("LOC4.3 completado.");
-
-        // LOC4.4
-        audioSource.clip = zonasIluminadas;
+        // Audio y video del tobillo
+        audioSource.clip = colocarEnTobilloAudio;
         audioSource.Play();
-        
-        // Activar las zonas de pulgar en el dispositivo
-        FindObjectOfType<DualGrabController>().ActivateThumbZones();
-        
+        videoTobillo.SetActive(true);
         yield return new WaitForSeconds(audioSource.clip.length);
 
-        Debug.Log("LOC4.4 completado.");
-
-        // LOC4.5
-        audioSource.clip = paraTomar;
-        audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
-
-        Debug.Log("LOC4.5 completado.");
-
-        // LOC4.6
-        audioSource.clip = seAjustara;
-        audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
-
-        Debug.Log("LOC4.6 completado: mostrar botón 'Continuar'.");
+        // 👉 Aquí ya entra en acción el AnkleZoneController
     }
+
+
 
     public void OnSimulationCompleted()
     {
