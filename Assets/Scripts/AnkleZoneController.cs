@@ -12,7 +12,7 @@ public class AnkleZoneController : MonoBehaviour
     public VideoPlayer videoPlayer;
 
     public AudioSource audioSource;
-
+    public AudioSource heartbeatSource;   
     [Header("Audios")]
     public AudioClip heartbeatAudio;
     public AudioClip posicionIdealAudio;
@@ -140,7 +140,9 @@ public class AnkleZoneController : MonoBehaviour
 
         // Mostrar panel ECG y video
         ecgPanel.SetActive(true);
-        audioSource.clip = heartbeatAudio; 
+        heartbeatSource.clip = heartbeatAudio;
+        heartbeatSource.loop = true;
+        heartbeatSource.Play();
         audioSource.Play();
         videoPlayer.Play();
         Debug.Log("SIMULACIÓN INICIADA");
@@ -196,6 +198,9 @@ public class AnkleZoneController : MonoBehaviour
         // Apagar ECG y zona
         ecgPanel.SetActive(false);
         ankleZone.SetActive(false);
+
+        heartbeatSource.Stop();
+        heartbeatSource.loop = false;
 
         // Cambiar maniquíes
         crossedLegMannequin.SetActive(false);

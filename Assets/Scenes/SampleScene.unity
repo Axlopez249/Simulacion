@@ -499,6 +499,7 @@ GameObject:
   - component: {fileID: 54592583}
   - component: {fileID: 54592582}
   - component: {fileID: 54592586}
+  - component: {fileID: 54592587}
   m_Layer: 0
   m_Name: AnkleZone
   m_TagString: Untagged
@@ -515,8 +516,8 @@ Transform:
   m_GameObject: {fileID: 54592579}
   serializedVersion: 2
   m_LocalRotation: {x: 0.4095746, y: -0.49673235, z: 0.7094073, w: 0.2867872}
-  m_LocalPosition: {x: 1.9337, y: 0.572, z: 15.9528}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalPosition: {x: 1.884, y: 0.552, z: 15.918}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 276783796}
@@ -636,6 +637,7 @@ MonoBehaviour:
   ecgPanel: {fileID: 1840216935}
   videoPlayer: {fileID: 1465435797}
   audioSource: {fileID: 54592582}
+  heartbeatSource: {fileID: 54592587}
   heartbeatAudio: {fileID: 8300000, guid: db63c6ce4d71af5418a70f6ca1dafb9d, type: 3}
   posicionIdealAudio: {fileID: 8300000, guid: d383d5bbde9c1914a87597560b9158ab, type: 3}
   mantenerEstableAudio: {fileID: 8300000, guid: 8699d4bdebcbf5a4a8bdd9f4ea390b0a, type: 3}
@@ -730,6 +732,103 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.10000004, y: 0.030000012, z: 0.010500006}
   m_Center: {x: -0.05000002, y: 0.015000002, z: 0.005250003}
+--- !u!82 &54592587
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54592579}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &89722166
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +901,7 @@ Transform:
   m_GameObject: {fileID: 160414799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.14, y: -0.038, z: 16.13}
+  m_LocalPosition: {x: 2.14, y: 0.092, z: 16.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1758,7 +1857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &331451751
 Transform:
   m_ObjectHideFlags: 0
@@ -2526,7 +2625,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635959246}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
   m_Name: 
@@ -3657,6 +3756,7 @@ MonoBehaviour:
   palpitacionPanel: {fileID: 1397403517}
   botonPrueba: {fileID: 291249750}
   cubo: {fileID: 50943839}
+  cubo2: {fileID: 1712360128}
   botonPaso2: {fileID: 1040500875}
   mesa: {fileID: 1634490356}
   bienvenida: {fileID: 8300000, guid: 2951e42d8b2ffb144864803eec7c1368, type: 3}
@@ -3712,6 +3812,8 @@ MonoBehaviour:
   sujeteDerechaAudio: {fileID: 8300000, guid: f2efed6acac3da84985fdfe991cfe9b1, type: 3}
   noSoltarDispositivoAudio: {fileID: 8300000, guid: fd6c9116cd1d58245bc9b98b267cda32, type: 3}
   colocarEnTobilloAudio: {fileID: 8300000, guid: 2694b657dfd113c48b9db9e1a937a166, type: 3}
+  thumbLeftZone: {fileID: 1908870638}
+  thumbRightZone: {fileID: 331451750}
   ahoraSuturno: {fileID: 8300000, guid: 9a614d99d471cac41951a024f2ad8818, type: 3}
   crucePierna: {fileID: 8300000, guid: 750c17be635f3a142b65014343c17eb9, type: 3}
   frenteAusted: {fileID: 8300000, guid: bb9671ae91f5bc243a1da4b9f30f00fb, type: 3}
@@ -4441,7 +4543,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.037906718, y: 0.70609003, z: -0.70609003, w: -0.037906718}
   m_LocalPosition: {x: 2.097, y: 0.58500004, z: 16.052824}
-  m_LocalScale: {x: -60.000027, y: -60.000008, z: -60.000008}
+  m_LocalScale: {x: -90, y: -70, z: -70}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4677,7 +4779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4381072889419385576, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4381072889419385576, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_TagString
@@ -4885,7 +4987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8935853449824297509, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8935853449824297509, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
       propertyPath: m_TagString
@@ -5208,7 +5310,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!328 &1465435797
 VideoPlayer:
@@ -6237,6 +6339,7 @@ MonoBehaviour:
   palpitacionPanel: {fileID: 1397403517}
   botonPrueba: {fileID: 0}
   cubo: {fileID: 0}
+  cubo2: {fileID: 0}
   botonPaso2: {fileID: 0}
   mesa: {fileID: 0}
   bienvenida: {fileID: 0}
@@ -6292,6 +6395,8 @@ MonoBehaviour:
   sujeteDerechaAudio: {fileID: 0}
   noSoltarDispositivoAudio: {fileID: 0}
   colocarEnTobilloAudio: {fileID: 0}
+  thumbLeftZone: {fileID: 0}
+  thumbRightZone: {fileID: 0}
   ahoraSuturno: {fileID: 0}
   crucePierna: {fileID: 0}
   frenteAusted: {fileID: 0}
@@ -7865,7 +7970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1908870639
 Transform:
   m_ObjectHideFlags: 0
@@ -8299,8 +8404,8 @@ Transform:
   m_GameObject: {fileID: 1969043350}
   serializedVersion: 2
   m_LocalRotation: {x: -0.066348016, y: 0.7039872, z: -0.7039872, w: -0.066348016}
-  m_LocalPosition: {x: 2.1582172, y: 0.53300005, z: 16.05605}
-  m_LocalScale: {x: -60.000008, y: -60, z: -60}
+  m_LocalPosition: {x: 2.1582172, y: 0.601, z: 16.05605}
+  m_LocalScale: {x: -90, y: -70, z: -70}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

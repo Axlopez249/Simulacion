@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class DualGrabController : MonoBehaviour
 {
     [Header("XR")]
-    public XRGrabInteractable grabInteractable;
+    public UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
 
     [Header("Scene Objects")]
     public GameObject normalMannequin;
@@ -25,29 +24,28 @@ public class DualGrabController : MonoBehaviour
         crossedLegMannequin.SetActive(false);
         ankleZone.SetActive(false);
 
-        thumbLeftZone.SetActive(false);
-        thumbRightZone.SetActive(false);
-
+        // ❌ Ya no apagamos las zonas aquí
         grabInteractable.selectEntered.AddListener(OnGrabbed);
         grabInteractable.selectExited.AddListener(OnReleased);
     }
 
     void OnGrabbed(SelectEnterEventArgs args)
     {
-        string tag = args.interactorObject.transform.tag;
+        string name = args.interactorObject.transform.name;
+        string parentName = args.interactorObject.transform.parent.name;
 
-        if (tag == "LeftController")
+        Debug.Log("OnGrabbed ejecutado por: " + name + " (padre: " + parentName + ")");
+
+        if (parentName.Contains("Left"))
         {
             leftGrabbed = true;
-            thumbLeftZone.SetActive(false); // apagar zona izquierda al agarrar
-            Debug.Log("Pulgar izquierdo agarrado");
+            Debug.Log("✔ Mano izquierda detectada");
         }
 
-        if (tag == "RightController")
+        if (parentName.Contains("Right"))
         {
             rightGrabbed = true;
-            thumbRightZone.SetActive(false); // apagar zona derecha al agarrar
-            Debug.Log("Pulgar derecho agarrado");
+            Debug.Log("✔ Mano derecha detectada");
 
             if (leftGrabbed && rightGrabbed)
             {
@@ -61,23 +59,12 @@ public class DualGrabController : MonoBehaviour
 
     void OnReleased(SelectExitEventArgs args)
     {
-        string tag = args.interactorObject.transform.tag;
+        string name = args.interactorObject.transform.name;
+        Debug.Log("OnReleased ejecutado por: " + args.interactorObject.transform.name);
 
-        if (tag == "LeftController") leftGrabbed = false;
-        if (tag == "RightController") rightGrabbed = false;
+        if (name.Contains("Left")) leftGrabbed = false;
+        if (name.Contains("Right")) rightGrabbed = false;
 
-        Debug.Log("Se soltó un pulgar");
-    }
-
-    public void ActivateLeftThumbZone()
-    {
-        thumbLeftZone.SetActive(true);
-        Debug.Log("Zona izquierda activada");
-    }
-
-    public void ActivateRightThumbZone()
-    {
-        thumbRightZone.SetActive(true);
-        Debug.Log("Zona derecha activada");
+        Debug.Log("Se soltó una mano");
     }
 }

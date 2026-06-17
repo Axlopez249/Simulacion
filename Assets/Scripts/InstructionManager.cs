@@ -12,6 +12,7 @@ public class InstructionManager : MonoBehaviour
     public GameObject palpitacionPanel;
     public GameObject botonPrueba;
     public GameObject cubo;
+    public GameObject cubo2;
     public GameObject botonPaso2;
     
     public GameObject mesa;
@@ -90,6 +91,11 @@ public class InstructionManager : MonoBehaviour
     public AudioClip sujeteDerechaAudio;
     public AudioClip noSoltarDispositivoAudio;
     public AudioClip colocarEnTobilloAudio;
+
+    [Header("Pulgares zonas")]
+    public GameObject thumbLeftZone;
+    public GameObject thumbRightZone;
+
 
     [Header("Paso 4: Medición")]
     [Header("Audios")]
@@ -183,7 +189,7 @@ public class InstructionManager : MonoBehaviour
     IEnumerator ContinueAfterCubeSequence()
     {
         cubo.SetActive(false); // Ocultar el cubo después de soltarlo
-
+        cubo2.SetActive(true); // Mostrar el segundo cubo después de soltar el primero
         //Para mayor comodidad audio
         if (paraMayorComodidad != null && audioSource != null)
         {
@@ -298,7 +304,7 @@ public class InstructionManager : MonoBehaviour
     IEnumerator ContinueAfterClickAudio()
     {
         // Esperar a que termine el audio al clickear
-        yield return new WaitForSeconds(paraAgarrar.length - 0.05f);
+        yield return new WaitForSeconds(audioAlClickear.length - 0.05f);
 
         // continuacion de audio paso 1
         if (paraAgarrar != null && audioSource != null)
@@ -312,6 +318,7 @@ public class InstructionManager : MonoBehaviour
     public void StartLOC2Step1()
     {   
         mesa.SetActive(false); // Ocultar la mesa para el paso 2
+        cubo2.SetActive(false); // Asegurarse de ocultar el segundo cubo para el paso 2
         // Aquí no usamos yield, solo lanzamos la corrutina
         StartCoroutine(StartLOC2Step1Coroutine());
     }
@@ -528,25 +535,24 @@ public class InstructionManager : MonoBehaviour
         audioSource.clip = sujeteIzquierdaAudio;
         audioSource.Play();
         videoPulgares.SetActive(true);
-        hativ.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>().enabled = true;
-        FindObjectOfType<DualGrabController>().ActivateLeftThumbZone();
+        Debug.Log("➡️ Activando zona izquierda");
+        thumbLeftZone.SetActive(true);
 
-        // Esperar hasta que realmente se agarre con la izquierda
+        Debug.Log("Esperando agarre izquierdo...");
         yield return new WaitUntil(() => FindObjectOfType<DualGrabController>().leftGrabbed);
+        Debug.Log("✅ Se detectó agarre izquierdo, apagando zona");
+        thumbLeftZone.SetActive(false);
 
-        // Ahora sí apagar la zona izquierda
-        FindObjectOfType<DualGrabController>().thumbLeftZone.SetActive(false);
 
         // Audio y zona derecha
         audioSource.clip = sujeteDerechaAudio;
         audioSource.Play();
-        FindObjectOfType<DualGrabController>().ActivateRightThumbZone();
+        thumbRightZone.SetActive(true);
 
-        // Esperar hasta que realmente se agarre con la derecha
         yield return new WaitUntil(() => FindObjectOfType<DualGrabController>().rightGrabbed);
 
-        // Ahora sí apagar la zona derecha
-        FindObjectOfType<DualGrabController>().thumbRightZone.SetActive(false);
+        thumbRightZone.SetActive(false);
+        videoPulgares.SetActive(false);
 
         // Audio de no soltar
         audioSource.clip = noSoltarDispositivoAudio;
@@ -558,8 +564,8 @@ public class InstructionManager : MonoBehaviour
         audioSource.Play();
         videoTobillo.SetActive(true);
         yield return new WaitForSeconds(audioSource.clip.length);
-
         // 👉 Aquí ya entra en acción el AnkleZoneController
+        videoTobillo.SetActive(false);
     }
 
 
