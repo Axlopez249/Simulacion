@@ -24,7 +24,6 @@ public class DualGrabController : MonoBehaviour
         crossedLegMannequin.SetActive(false);
         ankleZone.SetActive(false);
 
-        // ❌ Ya no apagamos las zonas aquí
         grabInteractable.selectEntered.AddListener(OnGrabbed);
         grabInteractable.selectExited.AddListener(OnReleased);
     }
@@ -39,13 +38,13 @@ public class DualGrabController : MonoBehaviour
         if (parentName.Contains("Left"))
         {
             leftGrabbed = true;
-            Debug.Log("✔ Mano izquierda detectada");
+            Debug.Log("Mano izquierda detectada");
         }
 
         if (parentName.Contains("Right"))
         {
             rightGrabbed = true;
-            Debug.Log("✔ Mano derecha detectada");
+            Debug.Log("Mano derecha detectada");
 
             if (leftGrabbed && rightGrabbed)
             {

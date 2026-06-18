@@ -2,10 +2,6 @@ using UnityEngine;
 using UnityEngine.Video;
 using System.Collections;   
 
-
-
-
-
 public class InstructionManager : MonoBehaviour
 {
     [Header("Main UI")]
@@ -16,6 +12,10 @@ public class InstructionManager : MonoBehaviour
     public GameObject botonPaso2;
     
     public GameObject mesa;
+
+    [Header("Maniquíes")]
+    public GameObject normalManiqui;
+    public GameObject crossedLegManiqui;
 
     [Header("Audio")]
     public AudioClip bienvenida;
@@ -525,6 +525,10 @@ public class InstructionManager : MonoBehaviour
         audioSource.clip = piernaIzquierdaSobreDerechaAudio;
         audioSource.Play();
         videoPiernaCruzada.SetActive(true);
+
+        normalMannequin.SetActive(false);
+        crossedLegMannequin.SetActive(true);
+
         yield return new WaitForSeconds(audioSource.clip.length);
         videoPiernaCruzada.SetActive(false);
 
