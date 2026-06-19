@@ -7,8 +7,6 @@ public class DualGrabController : MonoBehaviour
     public UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
 
     [Header("Scene Objects")]
-    public GameObject normalMannequin;
-    public GameObject crossedLegMannequin;
     public GameObject ankleZone;
 
     [Header("Pulgares zonas")]
@@ -20,8 +18,6 @@ public class DualGrabController : MonoBehaviour
 
     void Start()
     {
-        normalMannequin.SetActive(true);
-        crossedLegMannequin.SetActive(false);
         ankleZone.SetActive(false);
 
         grabInteractable.selectEntered.AddListener(OnGrabbed);
@@ -48,8 +44,6 @@ public class DualGrabController : MonoBehaviour
 
             if (leftGrabbed && rightGrabbed)
             {
-                normalMannequin.SetActive(false);
-                crossedLegMannequin.SetActive(true);
                 ankleZone.SetActive(true);
                 Debug.Log("Ambos pulgares agarrados → tobillo habilitado");
             }

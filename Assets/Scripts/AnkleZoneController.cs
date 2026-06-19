@@ -5,11 +5,11 @@ using UnityEngine.Video;
 public class AnkleZoneController : MonoBehaviour
 {
     [Header("References")]
+
+    [Header("Video ECG")]
+    public GameObject videoECG; 
+
     public Transform snapPoint;
-
-    public GameObject ecgPanel;
-
-    public VideoPlayer videoPlayer;
 
     public AudioSource audioSource;
     public AudioSource heartbeatSource;   
@@ -45,8 +45,8 @@ public class AnkleZoneController : MonoBehaviour
     void Start()
     {
         // El panel inicia apagado
-        ecgPanel.SetActive(false);
-        videoPlayer.loopPointReached += OnVideoFinished;
+        videoECG.SetActive(false);
+        videoECG.GetComponent<VideoPlayer>().loopPointReached += OnVideoFinished;
     }
 
     public InstructionManager instructionManager; // referencia al manager
@@ -66,10 +66,10 @@ public class AnkleZoneController : MonoBehaviour
             StopAllCoroutines();
 
             // Ocultar ECG por si estaba activo
-            ecgPanel.SetActive(false);
+            videoECG.SetActive(false);
 
             // Detener video
-            videoPlayer.Stop();
+            videoECG.GetComponent<VideoPlayer>().Stop();
 
             // Audio inicial
             audioSource.Stop();
@@ -96,13 +96,13 @@ public class AnkleZoneController : MonoBehaviour
 
             audioSource.Stop();
 
-            videoPlayer.Stop();
+            videoECG.GetComponent<VideoPlayer>().Stop();
 
-            ecgPanel.SetActive(false);
+            videoECG.SetActive(false);
         }
     }
 
-    void Update()
+    /*void Update()
     {
         // Efecto imán suave
         if(deviceInside && currentDevice != null)
@@ -119,7 +119,7 @@ public class AnkleZoneController : MonoBehaviour
                 Time.deltaTime * snapSpeed
             );
         }
-    }
+    }*/
 
     IEnumerator SimulationFlow()
     {
@@ -138,14 +138,18 @@ public class AnkleZoneController : MonoBehaviour
 
         if(!deviceInside) yield break;
 
-        // Mostrar panel ECG y video
-        ecgPanel.SetActive(true);
+        // Mostrar video ECG
+        videoECG.SetActive(true);
+
         heartbeatSource.clip = heartbeatAudio;
         heartbeatSource.loop = true;
         heartbeatSource.Play();
-        audioSource.Play();
-        videoPlayer.Play();
+
+        // El VideoPlayer ya está en el objeto videoECG
+        videoECG.GetComponent<VideoPlayer>().Play();
+
         Debug.Log("SIMULACIÓN INICIADA");
+
 
         // Audio 3: mostrar ECG
         audioSource.clip = mostrarECGAudio;
@@ -195,18 +199,15 @@ public class AnkleZoneController : MonoBehaviour
     {
         Debug.Log("VIDEO TERMINADO → cerrar simulación");
 
-        // Apagar ECG y zona
-        ecgPanel.SetActive(false);
+        videoECG.SetActive(false);
         ankleZone.SetActive(false);
 
         heartbeatSource.Stop();
         heartbeatSource.loop = false;
 
-        // Cambiar maniquíes
         crossedLegMannequin.SetActive(false);
         normalMannequin.SetActive(true);
 
-        // Notificar al InstructionManager para que continúe con LOC9.x y LOC10.x
         if(instructionManager != null)
         {
             instructionManager.OnSimulationCompleted();

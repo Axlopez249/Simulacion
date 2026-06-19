@@ -526,8 +526,8 @@ public class InstructionManager : MonoBehaviour
         audioSource.Play();
         videoPiernaCruzada.SetActive(true);
 
-        normalMannequin.SetActive(false);
-        crossedLegMannequin.SetActive(true);
+        normalManiqui.SetActive(false);
+        crossedLegManiqui.SetActive(true);
 
         yield return new WaitForSeconds(audioSource.clip.length);
         videoPiernaCruzada.SetActive(false);
