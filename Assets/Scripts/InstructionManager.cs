@@ -609,6 +609,8 @@ public class InstructionManager : MonoBehaviour
     public void OnTerminarExamenClicked()
     {
         terminarExamenButton.SetActive(false);
+        hativ.SetActive(false);
+        mesa.SetActive(false);
         resultadosPanel.SetActive(true);
 
         StartCoroutine(PlayResultsSequence());
